@@ -1,0 +1,277 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ProyectoFinal.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>VolHelp</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+    <form id="form1" runat="server">
+            <link href="css/styles.css" rel="stylesheet" />
+
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="Default.aspx">VolHelp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="Default.aspx">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="About.aspx">Quiénes somos</a></li>                        
+                         <li class="nav-item"><a class="nav-link" href="Mapa.aspx">Mapa</a></li>
+                        
+                    </ul>
+
+                    <ul class="navbar-nav me-auto"></ul>
+                    <button type="button" runat="server" class="btnSec" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-whatever="@mdo" id="idInicio" Style="margin:5px">
+                        INICIA SESIÓN                      
+                    </button>
+                    <button type="button" runat="server" class="btn" data-bs-toggle="modal" data-bs-target="#signUpModal" data-bs-whatever="@mdo" id="idRegistro" Style="margin:5px">
+                        REGISTRARSE                    
+                    </button>
+                   <asp:Button ID="btnResiPannel" runat="server" CssClass="btnSec" Text="PANEL DE CONTROL" OnClick="btnResiPannel_Click" />
+                   <asp:Button ID="btnLogOut" runat="server" CssClass="btn" Text="CERRAR SESIÓN" OnClick="btnLogOut_Click" />
+
+                </div>
+            </div>
+        </nav>
+
+
+
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">INICIAR SESSIÓN</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating">
+                            <asp:TextBox ID="txtMail" class="form-control" runat="server" placeholder="Email"></asp:TextBox>
+                            <label for="txtMail">Email</label>
+                            <br/>
+                            
+                        </div>
+                        <div class="form-floating">
+                            <asp:TextBox ID="txtPassword" TextMode="Password" class="form-control" runat="server" placeholder="Contraseña"></asp:TextBox>
+                            <label for="txtPassword">Contraseña</label>
+
+                        </div>
+                        <br>
+                        <div class="checkbox mb-1">
+                            <label>
+                                <input type="checkbox" runat="server" name="rememberme" id="rememberme">
+                                Recordarme
+                            </label>
+                        </div>
+                     
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btnSec" data-bs-dismiss="modal">CERRAR</button>
+                        <asp:Button ID="btnLogIn" runat="server" CssClass="btn" Text="INICIAR SESIÓN" OnClick="btnLogIn_Click" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="signUpTitle">REGISTRARSE</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div>
+                            <asp:ScriptManager ID="ScriptManager1" runat="server" />
+
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                <ContentTemplate>
+                                    <div>
+                                        <asp:Label ID="btnCurrentRegister" runat="server" Text="LAvel"></asp:Label>
+                                        <br />
+                                        <div class="row">
+                                        <asp:Button ID="btnVolu" class="btn2 col" runat="server" Text="Voluntario" OnClick="btnVolu_Click" Style="margin: 2%"/>
+                                        <asp:Button ID="btnResi" class="btn2 col" runat="server" Text="Residencia" OnClick="btnResi_Click" Style="margin: 2%"/>
+                                            </div>
+
+
+                                    </div>
+
+                                    <br />
+
+                                    <div runat="server" class="form-floating" id="divVolu">
+                                       <div class="form-floating">
+                                        <asp:TextBox ID="txtDni" class="form-control" runat="server" placeholder="DNI"></asp:TextBox>
+                                        <label for="txtDni">DNI</label>
+                                        <br/>
+                                    </div>
+                                    <div class="form-floating">
+                                        <asp:TextBox ID="txtNomV" class="form-control" runat="server" placeholder="Nombre"></asp:TextBox>
+                                        <label for="txtNomV">Nombre</label>
+                                        <br/>
+                                    </div>
+                                    <div class="form-floating">
+                                        <asp:TextBox ID="txtTelV" class="form-control" runat="server" placeholder="Teléfono"></asp:TextBox>
+                                        <label for="txtTelV">Teléfono</label>
+                                        <br/>
+                                    </div>
+                                    <div class="form-floating">
+                                        <asp:TextBox ID="txtEmailV" class="form-control" runat="server" placeholder="Email"></asp:TextBox>
+                                        <label for="txtTelV">Email</label>
+                                        <br/>
+                                    </div>
+                                    <div class="form-floating">
+                                        <asp:DropDownList ID="dlHor" runat="server">
+                                            <asp:ListItem>Mañanas</asp:ListItem>
+                                            <asp:ListItem>Tardes</asp:ListItem>
+                                        </asp:DropDownList>
+                                        <br/>
+                                        <br />
+                                    </div>
+                                    <div class="form-floating">
+                                        <asp:TextBox ID="txtPassV" TextMode="Password" class="form-control" runat="server" placeholder="Contraseña"></asp:TextBox>
+                                        <label for="txtPassV">Contraseña</label>
+                                        <br/>
+                                    </div>
+                                    </div>
+
+
+                                    <div runat="server" class="form-floating" id="divResi">
+
+                                    <div class="form-floating">
+                                        <asp:TextBox ID="txtNomR" class="form-control" runat="server" placeholder="Nombre"></asp:TextBox>
+                                        <label for="txtNomR">Nombre</label>
+                                        <br/>
+                                    </div>
+                                    <div class="form-floating">
+                                        <asp:TextBox ID="txtDireR" class="form-control" runat="server" placeholder="Dirección"></asp:TextBox>
+                                        <label for="txtDireR">Dirección</label>
+                                        <br/>
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <asp:TextBox ID="txtTelR" class="form-control" runat="server" placeholder="Teléfono"></asp:TextBox>
+                                        <label for="txtTelR">Teléfono</label>
+                                        <br/>
+                                    </div>
+                                    <div class="form-floating">
+                                        <asp:TextBox ID="txtEmailR" class="form-control" runat="server" placeholder="Email"></asp:TextBox>
+                                        <label for="txtEmailR">Email</label>
+                                        <br/>
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <asp:TextBox ID="txtPassR" class="form-control" runat="server" placeholder="Contraseña"></asp:TextBox>
+                                        <label for="txtPassR">Contraseña</label>
+                                        <br/>
+                                    </div>
+
+                                    </div>
+
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btnSec" data-bs-dismiss="modal">CERRAR</button>
+                        <asp:Button ID="btnSignUp" runat="server" CssClass="btn" Text="REGISTRAR" OnClick="btnSignUp_Click" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Inicio</a></li>
+                        <li><a runat="server" href="~/About">Acerca de</a></li>
+                        <li><a runat="server" href="~/Contact">Contacto</a></li>
+                    </ul>
+                </div>
+            -->
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                <link rel="stylesheet" href="/css/master.css" type="text/css" />
+            </asp:ContentPlaceHolder>
+            <hr/>
+
+   
+        </div>
+
+
+    </form>
+<footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>sobre nosotros</h6>
+            <p class="text-justify">Volhelp es un portal de búsqueda de voluntariados en residencias. Esta idea surge para fomentar la actividad social y mejorar los valores como sociedad. Somos un grupo de cuatro estudiantes de un curso de .NET organizado por FundaEsplai. Esta web es el resultado del proyecto final. <a href="About.aspx">Te animamos a conocernos un poco más</a>.</p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Menu</h6>
+            <ul class="footer-links">
+              <li><a href="Default.aspx">Home</a></li>
+              <li><a href="About.aspx">Quiénes somos</a></li>
+              <li><a href="#">Mapa</a></li>
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Contacto</h6>
+            <ul class="footer-links">
+              <li>Carrer d'En Llàstics 2</li>
+              <li>Barcelona</li>
+              <li>volhelp@gmail.com</li>
+              <li>612 20 77 61</li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2022 All Rights Reserved by Volhelp.
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
+            </ul>
+          </div>
+        </div>
+      </div>
+</footer>
+</body>
+</html>
